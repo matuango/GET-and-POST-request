@@ -1,0 +1,112 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "GET and POST Request for Numbered Text Items",
+    "description": "API for fetching a list of numbered text entries and updating Google Sheets.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://hook.us2.make.com"
+    }
+  ],
+  "paths": {
+    "/m43r56tsmbgiivkv8x40x5c8b8sa9iyx": {
+      "get": {
+        "summary": "Fetches numbered text entries",
+        "operationId": "fetchNumberedTexts",
+        "responses": {
+          "200": {
+            "description": "A successful response containing a list of numbered text entries.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "description": "Array containing numbered text items.",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "1": {
+                            "type": "string",
+                            "description": "Text entry for label 1"
+                          },
+                          "2": {
+                            "type": "string",
+                            "description": "Text entry for label 2"
+                          },
+                          "3": {
+                            "type": "string",
+                            "description": "Text entry for label 3"
+                          },
+                          "4": {
+                            "type": "string",
+                            "description": "Text entry for label 4"
+                          },
+                          "5": {
+                            "type": "string",
+                            "description": "Text entry for label 5"
+                          }
+                        },
+                        "required": ["1", "2", "3", "4", "5"]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Send data to update a Google Sheets cell",
+        "operationId": "updateGoogleSheetsCell",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "cell": {
+                    "type": "string",
+                    "description": "The cell in Google Sheets to be updated (e.g., 'A1')"
+                  },
+                  "value": {
+                    "type": "string",
+                    "description": "The value to update the specified cell with"
+                  }
+                },
+                "required": ["cell", "value"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "A successful response indicating the cell has been updated.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "description": "Status of the update request"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Details about the operation outcome"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
